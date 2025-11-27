@@ -1,0 +1,1278 @@
+===============================================================================
+                        MİNİSHOP E-TİCARET PROJESİ
+                          DETAYLI SUNUM DOKÜMANI
+===============================================================================
+
+📋 İÇİNDEKİLER
+-------------------------------------------------------------------------------
+1. Proje Hakkında Genel Bilgi
+2. Kullanılan Teknolojiler
+3. Proje Mimarisi ve Dosya Yapısı
+4. Veritabanı Tasarımı
+5. Özellikler ve Fonksiyonlar
+6. Güvenlik Önlemleri
+7. Tasarım ve Kullanıcı Deneyimi
+8. Sayfalar ve İşlevleri
+9. Teknik Detaylar
+10. Gelecek Geliştirmeler
+
+
+===============================================================================
+1. PROJE HAKKINDA GENEL BİLGİ
+===============================================================================
+
+Proje Adı: MiniShop - Modern E-Ticaret Platformu
+Geliştirme Tarihi: 2024
+Proje Tipi: Web Tabanlı E-Ticaret Uygulaması
+
+MiniShop, kullanıcı dostu arayüzü ve modern tasarımıyla küçük ve orta
+ölçekli işletmelerin ürünlerini online olarak satabilmesini sağlayan
+tam özellikli bir e-ticaret platformudur.
+
+Ana Hedefler:
+- Modern ve etkileyici kullanıcı arayüzü
+- Güvenli ve hızlı alışveriş deneyimi
+- Kolay yönetilebilir admin paneli
+- Mobil uyumlu responsive tasarım
+- Güvenli kullanıcı kimlik doğrulama sistemi
+
+
+===============================================================================
+2. KULLANILAN TEKNOLOJİLER
+===============================================================================
+
+BACKEND (Sunucu Tarafı):
+--------------------------
+• PHP 7.4+
+  - Server-side programming dili
+  - Session yönetimi
+  - Form işleme ve validasyon
+  - Veritabanı bağlantısı ve sorguları
+
+• MySQL (MariaDB)
+  - İlişkisel veritabanı yönetim sistemi
+  - Ürün, kullanıcı ve sepet verilerinin saklanması
+  - ACID özelliklerine sahip güvenli veri saklama
+
+• MySQLi (MySQL Improved)
+  - PHP'nin MySQL ile iletişim kurması için kullanılan extension
+  - Prepared Statements ile SQL Injection koruması
+  - Procedural ve Object-Oriented kullanım desteği
+
+
+FRONTEND (İstemci Tarafı):
+--------------------------
+• HTML5
+  - Semantic HTML yapısı
+  - Modern web standartları
+  - Form validasyonu
+
+• CSS3
+  - Custom Properties (CSS Variables)
+  - Flexbox ve Grid Layout
+  - Animations ve Transitions
+  - Media Queries (Responsive Design)
+  - Gradient backgrounds
+  - Glassmorphism efektleri
+
+• Bootstrap 5.3.2
+  - Responsive grid sistemi
+  - Hazır component'ler (Cards, Buttons, Forms, Navbar, vb.)
+  - Utility classes
+  - JavaScript plugin'leri
+
+• Bootstrap Icons 1.11.3
+  - 2000+ icon kütüphanesi
+  - Vektör tabanlı ikonlar
+  - Kolay entegrasyon
+
+• JavaScript (Vanilla JS)
+  - Form validasyonu
+  - Real-time ürün arama
+  - Dinamik içerik güncellemeleri
+  - Event handling
+
+• Google Fonts (Poppins)
+  - Modern ve okunabilir tipografi
+  - Web font optimizasyonu
+
+
+GELIŞTIRME ORTAMI:
+--------------------------
+• XAMPP
+  - Apache Web Server
+  - MySQL/MariaDB Database
+  - phpMyAdmin (Veritabanı yönetimi)
+
+• Localhost Test Environment
+  - Yerel geliştirme ortamı
+  - Port 80 (HTTP)
+
+
+===============================================================================
+3. PROJE MİMARİSİ VE DOSYA YAPISI
+===============================================================================
+
+MiniShop/
+│
+├── index.php                    # Ana sayfa (Landing page)
+├── products.php                 # Ürünler listesi sayfası
+├── login.php                    # Kullanıcı giriş sayfası
+├── register.php                 # Kullanıcı kayıt sayfası
+├── cart.php                     # Alışveriş sepeti sayfası
+├── admin.php                    # Admin yönetim paneli
+├── edit_product.php             # Ürün düzenleme sayfası
+├── delete_product.php           # Ürün silme işlemi
+├── add_to_cart.php              # Sepete ürün ekleme
+├── remove_from_cart.php         # Sepetten ürün çıkarma
+├── logout.php                   # Çıkış işlemi
+├── database.sql                 # Veritabanı şeması ve örnek veriler
+├── PROJE_SUNUMU.txt            # Bu dosya
+│
+├── includes/                    # Paylaşılan dosyalar
+│   ├── db.php                  # Veritabanı bağlantısı
+│   ├── header.php              # Sayfa başlığı ve navbar
+│   └── footer.php              # Sayfa alt bilgisi
+│
+└── assets/                      # Statik dosyalar
+    ├── css/
+    │   └── style.css           # Ana CSS dosyası (590 satır)
+    └── images/                  # Ürün görselleri
+        ├── headphones.png
+        ├── smartwatch.png
+        ├── laptop-bag.png
+        ├── canvas-bag.png
+        ├── wireless-mouse.png
+        ├── usb-hub.png
+        ├── keyboard.jpg
+        ├── leather-wallet.jpg
+        ├── sport-shoes.png
+        └── no-image.png        # Varsayılan görsel
+
+
+MİMARİ YAPISI:
+--------------------------
+• MVC Benzeri Yapı:
+  - Model: Veritabanı işlemleri (db.php, SQL sorguları)
+  - View: HTML ve dinamik içerik (PHP echo ile)
+  - Controller: PHP sayfaları (iş mantığı ve veri işleme)
+
+• Modüler Yapı:
+  - Tekrar kullanılabilir bileşenler (header, footer)
+  - Ayrı dosyalarda tutulmuş işlevler
+  - DRY (Don't Repeat Yourself) prensibi
+
+
+===============================================================================
+4. VERİTABANI TASARIMI
+===============================================================================
+
+Veritabanı Adı: minishop
+Karakter Seti: utf8mb4_general_ci (Türkçe karakter desteği)
+
+
+TABLOLAR:
+--------------------------
+
+1. users (Kullanıcılar Tablosu)
+   ├── id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   ├── name (VARCHAR 100) - Kullanıcı adı soyadı
+   ├── email (VARCHAR 100, UNIQUE) - E-posta adresi
+   ├── password (VARCHAR 255) - Hash'lenmiş şifre (bcrypt)
+   ├── is_admin (TINYINT, DEFAULT 0) - Admin yetkisi (0: Hayır, 1: Evet)
+   └── created_at (DATETIME) - Kayıt tarihi
+
+   Varsayılan Admin Hesabı:
+   - Email: admin@minishop.com
+   - Şifre: admin123
+   - Yetki: Admin
+
+2. products (Ürünler Tablosu)
+   ├── id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   ├── name (VARCHAR 200) - Ürün adı
+   ├── description (TEXT) - Ürün açıklaması
+   ├── price (DECIMAL 10,2) - Ürün fiyatı
+   ├── stock (INT, DEFAULT 0) - Stok miktarı
+   ├── image (VARCHAR 255) - Görsel dosya adı
+   ├── status (ENUM 'active'/'inactive', DEFAULT 'active') - Durum
+   └── created_at (DATETIME) - Eklenme tarihi
+
+   Örnek Ürünler: 9 adet teknoloji ürünü
+
+3. cart (Alışveriş Sepeti Tablosu)
+   ├── id (INT, PRIMARY KEY, AUTO_INCREMENT)
+   ├── user_id (INT, FOREIGN KEY -> users.id) - Kullanıcı referansı
+   ├── product_id (INT, FOREIGN KEY -> products.id) - Ürün referansı
+   ├── quantity (INT, DEFAULT 1) - Ürün adedi
+   └── created_at (DATETIME) - Sepete eklenme tarihi
+
+   İlişkiler:
+   - user_id: users tablosu ile 1:N ilişki
+   - product_id: products tablosu ile 1:N ilişki
+   - CASCADE DELETE: Kullanıcı veya ürün silindiğinde sepet kayıtları otomatik silinir
+
+
+VERİTABANI ŞEMASI ÖZELLİKLERİ:
+--------------------------
+• InnoDB Storage Engine
+  - Transaction desteği
+  - Foreign Key constraints
+  - ACID uyumluluğu
+
+• UTF-8 Karakter Seti
+  - Türkçe karakter desteği
+  - Uluslararası karakter desteği
+
+• Normalizasyon
+  - 3. Normal Form (3NF)
+  - Veri tekrarı minimize edilmiş
+  - İlişkisel bütünlük korunmuş
+
+
+===============================================================================
+5. ÖZELLIKLER VE FONKSİYONLAR
+===============================================================================
+
+KULLANICI ÖZELLİKLERİ:
+--------------------------
+✓ Kullanıcı Kayıt Sistemi
+  - İsim, email ve şifre ile kayıt
+  - Email benzersizlik kontrolü
+  - Şifre uzunluk kontrolü (minimum 6 karakter)
+  - Şifre eşleşme kontrolü
+  - Otomatik giriş (kayıt sonrası)
+
+✓ Kullanıcı Girişi
+  - Email ve şifre ile giriş
+  - Bcrypt şifre doğrulama
+  - Session tabanlı oturum yönetimi
+  - "Beni Hatırla" özelliği (UI'da mevcut)
+  - Admin/Kullanıcı yönlendirmesi
+
+✓ Ürün Görüntüleme
+  - Ana sayfada öne çıkan ürünler (3 adet)
+  - Ürünler sayfasında tüm ürünler
+  - Real-time arama fonksiyonu
+  - Stok durumu gösterimi
+  - Fiyat bilgisi
+  - Ürün görselleri
+
+✓ Alışveriş Sepeti
+  - Sepete ürün ekleme
+  - Sepetten ürün çıkarma
+  - Miktar güncelleme
+  - Toplam tutar hesaplama
+  - Stok kontrolü
+
+✓ Profil ve Oturum
+  - Navbar'da kullanıcı adı gösterimi
+  - Güvenli çıkış (session destroy)
+
+
+ADMIN PANELİ ÖZELLİKLERİ:
+--------------------------
+✓ Admin Dashboard
+  - Toplam ürün sayısı gösterimi
+  - Modern ve şık arayüz
+  - Hızlı erişim butonları
+
+✓ Ürün Yönetimi
+  - Yeni ürün ekleme
+    * Ürün adı, açıklama
+    * Fiyat belirleme
+    * Stok miktarı
+    * Görsel yükleme (JPG, PNG, GIF, WEBP)
+
+  - Ürün düzenleme
+    * Tüm bilgileri güncelleme
+    * Görsel değiştirme
+    * Durum değiştirme (aktif/pasif)
+
+  - Ürün silme
+    * Onay ile silme
+    * Güvenli silme işlemi
+
+✓ Ürün Listesi
+  - Tablo formatında görüntüleme
+  - Ürün görseli, ad, açıklama
+  - Fiyat, stok, durum bilgileri
+  - Hızlı düzenle/sil butonları
+  - Renkli badge'ler (stok durumuna göre)
+
+
+GENEL SİSTEM ÖZELLİKLERİ:
+--------------------------
+✓ Responsive Tasarım
+  - Mobil cihazlarda uyumlu
+  - Tablet uyumlu
+  - Desktop optimize
+
+✓ Dinamik İçerik
+  - PHP ile sunucu taraflı rendering
+  - Session yönetimi
+  - Flash mesajlar
+
+✓ Arama Fonksiyonu
+  - JavaScript ile real-time arama
+  - Ürün adına göre filtreleme
+  - Anında sonuç gösterimi
+
+
+===============================================================================
+6. GÜVENLİK ÖNLEMLERİ
+===============================================================================
+
+UYGULANMIŞ GÜVENLİK KATMANLARI:
+--------------------------
+
+1. SQL Injection Koruması
+   ✓ Prepared Statements kullanımı
+   ✓ Parametreli sorgular
+   ✓ bind_param() ile veri bağlama
+
+   Örnek Kod:
+   $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+   $stmt->bind_param("s", $email);
+
+2. XSS (Cross-Site Scripting) Koruması
+   ✓ htmlspecialchars() fonksiyonu
+   ✓ Tüm kullanıcı girdilerinin filtrelenmesi
+   ✓ Output encoding
+
+   Örnek Kod:
+   echo htmlspecialchars($product['name']);
+
+3. Şifre Güvenliği
+   ✓ bcrypt hash algoritması
+   ✓ PASSWORD_BCRYPT kullanımı
+   ✓ password_hash() ve password_verify()
+   ✓ Salt otomatik ekleniyor
+
+   Örnek Kod:
+   $hashed = password_hash($password, PASSWORD_BCRYPT);
+   password_verify($input, $hashed);
+
+4. Session Güvenliği
+   ✓ Session hijacking koruması
+   ✓ Session fixation koruması
+   ✓ Güvenli session yönetimi
+   ✓ session_start() kontrollü kullanım
+
+5. Authentication & Authorization
+   ✓ Kullanıcı kimlik doğrulama
+   ✓ Admin yetki kontrolü
+   ✓ Sayfa erişim kontrolü
+   ✓ Login required middleware benzeri kontroller
+
+   Örnek Kod:
+   if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
+       header("Location: login.php");
+       exit();
+   }
+
+6. File Upload Güvenliği
+   ✓ Dosya uzantısı kontrolü
+   ✓ İzin verilen formatlar: jpg, jpeg, png, gif, webp
+   ✓ Unique dosya adı oluşturma
+   ✓ Güvenli dizine yükleme
+
+   Örnek Kod:
+   $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+   if (in_array($ext, $allowed)) {
+       $new_filename = uniqid() . '.' . $ext;
+   }
+
+7. CSRF Koruması (Temel)
+   ✓ HTTP Referer kontrolü
+   ✓ POST yöntemi kullanımı
+   ✓ Session tabanlı doğrulama
+
+8. Input Validation
+   ✓ trim() ile boşluk temizleme
+   ✓ Email format kontrolü
+   ✓ Şifre uzunluk kontrolü
+   ✓ Numerik değer kontrolü (intval, floatval)
+
+9. Error Handling
+   ✓ Kullanıcı dostu hata mesajları
+   ✓ Teknik detayların gizlenmesi
+   ✓ Try-catch benzeri kontroller
+
+
+===============================================================================
+7. TASARIM VE KULLANICI DENEYİMİ (UX/UI)
+===============================================================================
+
+TASARIM FELSEFESİ:
+--------------------------
+• Modern ve Minimalist
+• Renkli ve Canlı
+• Kullanıcı Dostu
+• Profesyonel Görünüm
+• Etkileyici Animasyonlar
+
+
+KULLANILAN TASARIM TEKNİKLERİ:
+--------------------------
+
+1. Gradient Backgrounds
+   ✓ Linear-gradient kullanımı
+   ✓ Çok renkli geçişler
+   ✓ 135deg açılı gradientler
+
+   Renk Paletleri:
+   - Primary: #667eea → #764ba2 (Mor-pembe)
+   - Success: #0ba360 → #3cba92 (Yeşil)
+   - Secondary: #f093fb → #f5576c (Pembe-kırmızı)
+
+2. Glassmorphism Efekti
+   ✓ backdrop-filter: blur()
+   ✓ Yarı saydam arka planlar
+   ✓ Beyaz opacity ile cam efekti
+
+   Kullanım Alanları:
+   - Navbar
+   - Modal'lar
+   - Özel kartlar
+
+3. Animasyonlar
+   ✓ @keyframes ile özel animasyonlar
+   ✓ CSS transitions
+   ✓ Hover efektleri
+
+   Animasyon Tipleri:
+   - fadeInUp: Aşağıdan yukarı kayarak belirme
+   - float: Yukarı-aşağı dalgalanma
+   - slideDown: Yukarıdan aşağı kayma
+
+   Örnek Kod:
+   @keyframes fadeInUp {
+       from { opacity: 0; transform: translateY(30px); }
+       to { opacity: 1; transform: translateY(0); }
+   }
+
+4. Micro-interactions
+   ✓ Button hover efektleri
+   ✓ Card hover (scale, translateY)
+   ✓ Icon animasyonları
+   ✓ Ripple efekt (button click)
+
+5. Tipografi
+   ✓ Google Fonts - Poppins
+   ✓ Font weights: 300, 400, 500, 600, 700
+   ✓ Optimal line-height: 1.6
+   ✓ Responsive font sizes
+
+6. Color System
+   CSS Variables ile yönetilen renk sistemi:
+   --primary: #6366f1
+   --secondary: #ec4899
+   --success: #10b981
+   --warning: #f59e0b
+   --danger: #ef4444
+   --dark: #1e293b
+   --light: #f8fafc
+
+7. Spacing System
+   ✓ Bootstrap spacing utilities
+   ✓ Tutarlı padding/margin değerleri
+   ✓ Gap system (g-4, g-3, etc.)
+
+8. Shadow System
+   ✓ 4 seviye shadow tanımı
+   --shadow-sm: 0 2px 8px rgba(0,0,0,0.04)
+   --shadow-md: 0 4px 16px rgba(0,0,0,0.08)
+   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12)
+   --shadow-xl: 0 16px 48px rgba(0,0,0,0.16)
+
+9. Border Radius
+   ✓ Yuvarlak köşeler
+   ✓ Değerler: 10px, 12px, 20px, 24px
+   ✓ Pills: 50px (tam yuvarlak)
+
+10. Responsive Design
+    ✓ Mobile-first yaklaşım
+    ✓ Breakpoints:
+      - xs: <576px
+      - sm: ≥576px
+      - md: ≥768px
+      - lg: ≥992px
+      - xl: ≥1200px
+
+
+SAYFA TASARIMLARI:
+--------------------------
+
+🏠 Ana Sayfa (index.php)
+  - Revolutionary Hero Section
+    * 3 renkli gradient background
+    * Animasyonlu floating circles
+    * İstatistik kartları (500+ Ürün, 10K+ Müşteri)
+    * Floating ürün kartları (3 adet, random)
+    * SVG wave transition
+
+  - Features Section
+    * 3 özellik kartı
+    * Gradient icon backgrounds
+    * Hover animasyonları
+
+  - Products Section
+    * Öne çıkan 3 ürün
+    * Modern ürün kartları
+    * Sepete ekle butonları
+
+🛍️ Ürünler Sayfası (products.php)
+  - Gradient Header
+    * Animated background
+    * Breadcrumb navigation
+    * Search bar (pill-shaped)
+
+  - Product Grid
+    * 4 sütunlu responsive grid
+    * Wishlist heart buttons
+    * Stock badges
+    * Staggered animations
+
+📝 Kayıt Sayfası (register.php)
+  - Split-screen Design
+    * Sol: Gradient background + features
+    * Sağ: Kayıt formu
+    * Animated circles
+    * Social login buttons
+
+🔐 Giriş Sayfası (login.php)
+  - Split-screen Design
+    * Sol: Form
+    * Sağ: Pembe gradient + testimonial
+    * "Remember Me" checkbox
+    * Forgot password link
+
+👨‍💼 Admin Paneli (admin.php)
+  - Dashboard Header
+    * Gradient background
+    * Animated circles
+    * Product count card
+
+  - Two Column Layout
+    * Sol: Ürün ekleme formu
+    * Sağ: Ürün listesi tablosu
+    * Modern cards with gradients
+
+
+KULLANICI DENEYİMİ (UX) ÖZELLİKLERİ:
+--------------------------
+✓ Kolay navigasyon
+✓ Açık ve anlaşılır CTA (Call-to-Action) butonları
+✓ Anında geri bildirim (alert mesajları)
+✓ Loading states
+✓ Error handling ve kullanıcı dostu mesajlar
+✓ Tutarlı tasarım dili
+✓ Erişilebilirlik (accessibility) odaklı
+✓ Hızlı yükleme süreleri
+✓ Mobil dokunmatik uyumlu
+
+
+===============================================================================
+8. SAYFALAR VE İŞLEVLERİ
+===============================================================================
+
+1. INDEX.PHP (Ana Sayfa)
+--------------------------
+Amaç: Ziyaretçileri karşılama ve ürünlere yönlendirme
+
+Bölümler:
+• Hero Section
+  - Büyük başlık ve tanıtım metni
+  - CTA butonları (Alışverişe Başla, Kayıt Ol)
+  - Floating product cards (3 random ürün)
+  - İstatistikler (500+ Ürün, 10K+ Müşteri, %99 Memnuniyet)
+
+• Features Section
+  - Hızlı Teslimat (24 saat)
+  - Güvenli Ödeme (SSL)
+  - Kolay İade (14 gün)
+
+• Featured Products
+  - Son eklenen 3 ürün
+  - Sepete ekle butonları
+  - Stok bilgisi
+
+• CTA Section
+  - Kayıt olmaya teşvik
+  - Gradient background
+
+Veritabanı Sorguları:
+- Hero için random 3 ürün
+- Featured products için son 3 ürün (LIMIT 3)
+
+
+2. PRODUCTS.PHP (Ürünler Sayfası)
+--------------------------
+Amaç: Tüm ürünleri listeleme ve arama
+
+Özellikler:
+• Modern page header
+  - Breadcrumb navigation
+  - Arama çubuğu (real-time search)
+  - Grid/List view toggle (UI)
+
+• Product Grid
+  - Tüm aktif ürünler
+  - 4 sütunlu responsive grid
+  - Her kartta:
+    * Ürün görseli
+    * Ürün adı
+    * Açıklama (80 karakter)
+    * Fiyat
+    * Stok badge
+    * Sepete ekle butonu (giriş yapılmışsa)
+    * Wishlist butonu (UI)
+
+• JavaScript Search
+  - Anlık arama
+  - data-name attribute ile filtreleme
+  - Sonuçları göster/gizle
+
+Veritabanı Sorguları:
+- Tüm aktif ürünleri getir (status='active')
+- Oluşturma tarihine göre sırala (DESC)
+
+
+3. LOGIN.PHP (Giriş Sayfası)
+--------------------------
+Amaç: Kullanıcı girişi
+
+Form Alanları:
+• Email (required, email validation)
+• Password (required)
+• Remember Me checkbox (UI)
+• Forgot Password link (UI)
+
+İşlem Akışı:
+1. Form submit
+2. Email ve şifreyi al
+3. Veritabanında email ara
+4. Şifre doğrulama (password_verify)
+5. Session oluştur (user_id, user_name, is_admin)
+6. Yönlendirme:
+   - Admin ise → admin.php
+   - Normal kullanıcı → index.php
+
+Hata Durumları:
+- Kullanıcı bulunamadı
+- Hatalı şifre
+
+Split-screen Tasarım:
+- Sol: Login formu
+- Sağ: Gradient background + features + testimonial
+
+
+4. REGISTER.PHP (Kayıt Sayfası)
+--------------------------
+Amaç: Yeni kullanıcı kaydı
+
+Form Alanları:
+• Ad Soyad (required)
+• Email (required, unique)
+• Şifre (required, min 6 karakter)
+• Şifre Tekrar (required, eşleşme kontrolü)
+• Terms & Conditions checkbox (required)
+
+İşlem Akışı:
+1. Form validation
+2. Şifre eşleşme kontrolü
+3. Şifre uzunluk kontrolü
+4. Email benzersizlik kontrolü
+5. Şifre hash'leme (bcrypt)
+6. Veritabanına kayıt
+7. Otomatik giriş (session oluştur)
+8. index.php'ye yönlendir
+
+Güvenlik:
+- Prepared statements
+- Password hashing
+- XSS koruması
+- Email benzersizlik
+
+Split-screen Tasarım:
+- Sol: Mor gradient + features list
+- Sağ: Kayıt formu
+
+
+5. CART.PHP (Sepet Sayfası)
+--------------------------
+Amaç: Sepetteki ürünleri görüntüleme
+
+Özellikler:
+• Sepet tablosu
+  - Ürün görseli
+  - Ürün adı
+  - Birim fiyat
+  - Miktar
+  - Toplam fiyat
+  - Çıkar butonu
+
+• Toplam Tutar hesaplama
+• Boş sepet durumu
+• Alışverişe devam butonu
+
+Veritabanı Sorguları:
+- JOIN ile cart + products + users
+- Kullanıcının sepetindeki ürünler
+- Toplam tutar hesaplama
+
+
+6. ADMIN.PHP (Admin Paneli)
+--------------------------
+Amaç: Ürün yönetimi
+
+Yetki Kontrolü:
+- is_admin == 1 kontrolü
+- Yetkisiz erişim engelleme
+
+Dashboard:
+• Header
+  - Toplam ürün sayısı kartı
+  - Animated background
+
+• Yeni Ürün Ekleme Formu
+  - Ürün adı
+  - Açıklama
+  - Fiyat
+  - Stok
+  - Görsel upload
+  - Form validation
+
+• Ürün Listesi Tablosu
+  - Tüm ürünler
+  - Görsel thumbnail
+  - Fiyat, stok, durum bilgisi
+  - Renkli badges
+  - Düzenle/Sil butonları
+
+Veritabanı İşlemleri:
+- INSERT: Yeni ürün ekleme
+- SELECT: Tüm ürünleri listeleme
+- File upload: Görsel yükleme
+
+
+7. EDIT_PRODUCT.PHP (Ürün Düzenleme)
+--------------------------
+Amaç: Mevcut ürünü güncelleme
+
+Özellikler:
+• Mevcut bilgileri form'a doldurma
+• Tüm alanları düzenleme
+• Görsel değiştirme (opsiyonel)
+• Durum değiştirme (active/inactive)
+• Preview görsel gösterme
+
+Veritabanı İşlemleri:
+- SELECT: Ürün bilgilerini getir
+- UPDATE: Ürün bilgilerini güncelle
+- File handling: Yeni görsel upload
+
+
+8. DELETE_PRODUCT.PHP (Ürün Silme)
+--------------------------
+Amaç: Ürünü veritabanından silme
+
+Güvenlik:
+• Admin kontrolü
+• Onay dialog (JavaScript)
+• Session mesajları
+
+İşlem:
+1. Ürün ID'si al
+2. DELETE sorgusu çalıştır
+3. Success/Error mesajı
+4. admin.php'ye yönlendir
+
+
+9. ADD_TO_CART.PHP (Sepete Ekleme)
+--------------------------
+Amaç: Ürünü kullanıcının sepetine ekleme
+
+İşlem Akışı:
+1. Ürün ID'si al
+2. Login kontrolü
+3. Stok kontrolü
+4. Sepette var mı kontrol et
+   - Varsa: Miktar artır
+   - Yoksa: Yeni kayıt ekle
+5. cart.php'ye yönlendir
+
+Validasyonlar:
+- Kullanıcı girişi zorunlu
+- Stok yeterli mi kontrolü
+- Maksimum miktar kontrolü
+
+
+10. REMOVE_FROM_CART.PHP (Sepetten Çıkarma)
+--------------------------
+Amaç: Ürünü sepetten kaldırma
+
+İşlem:
+1. Cart ID'si al
+2. User ID doğrula
+3. DELETE sorgusu
+4. cart.php'ye yönlendir
+
+
+11. LOGOUT.PHP (Çıkış)
+--------------------------
+Amaç: Kullanıcı oturumunu sonlandırma
+
+İşlemler:
+1. session_start()
+2. session_destroy()
+3. Session değişkenlerini temizle
+4. index.php'ye yönlendir
+
+
+===============================================================================
+9. TEKNİK DETAYLAR
+===============================================================================
+
+VERİTABANI BAĞLANTISI (includes/db.php)
+--------------------------
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "minishop";
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+Özellikler:
+• Bağlantı hatası kontrolü
+• UTF-8 karakter seti (mysqli_set_charset)
+• Singleton pattern benzeri kullanım
+
+
+SESSION YÖNETİMİ
+--------------------------
+Session Değişkenleri:
+$_SESSION['user_id']      // Kullanıcı ID
+$_SESSION['user_name']    // Kullanıcı adı
+$_SESSION['is_admin']     // Admin yetkisi (0 veya 1)
+$_SESSION['success']      // Başarı mesajları
+$_SESSION['error']        // Hata mesajları
+
+Session Güvenlik:
+• session_status() kontrolü (duplicate session önleme)
+• session_destroy() ile temiz çıkış
+• Session hijacking koruması
+
+
+PREPARED STATEMENTS KULLANIMI
+--------------------------
+Örnek 1: SELECT sorgusu
+$stmt = $conn->prepare("SELECT id, name, password FROM users WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($id, $name, $password);
+
+Örnek 2: INSERT sorgusu
+$stmt = $conn->prepare("INSERT INTO products (name, price, stock) VALUES (?, ?, ?)");
+$stmt->bind_param("sdi", $name, $price, $stock);
+$stmt->execute();
+
+Parametre Tipleri:
+s = string
+i = integer
+d = double
+b = blob
+
+
+FILE UPLOAD SİSTEMİ
+--------------------------
+Güvenlik Kontrolü:
+1. $_FILES['image']['error'] == 0
+2. Uzantı kontrolü (jpg, jpeg, png, gif, webp)
+3. Unique filename (uniqid())
+4. Target directory: assets/images/
+5. move_uploaded_file() ile taşıma
+
+Örnek Kod:
+$allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+$ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+if (in_array($ext, $allowed)) {
+    $new_filename = uniqid() . '.' . $ext;
+    move_uploaded_file($_FILES['image']['tmp_name'], "assets/images/" . $new_filename);
+}
+
+
+ERROR HANDLING
+--------------------------
+Kullanılan Yöntemler:
+• if/else kontrol yapıları
+• mysqli_error() ile hata mesajları
+• try-catch benzeri mantık
+• Kullanıcı dostu mesajlar
+
+Örnek:
+if ($stmt->execute()) {
+    $success = "İşlem başarılı!";
+} else {
+    $error = "Bir hata oluştu: " . $conn->error;
+}
+
+
+RESPONSIVE DESIGN
+--------------------------
+Bootstrap Grid System:
+• Container
+• Row
+• Col-* classes
+  - col-sm-* (≥576px)
+  - col-md-* (≥768px)
+  - col-lg-* (≥992px)
+  - col-xl-* (≥1200px)
+
+Custom Media Queries:
+@media (max-width: 768px) {
+    .hero-section h1 { font-size: 2.5rem; }
+    .product-card:hover { transform: translateY(-8px); }
+}
+
+Mobile-first Approach:
+• Önce mobil tasarla
+• Sonra desktop'a genişlet
+
+
+CSS CUSTOM PROPERTIES
+--------------------------
+Avantajları:
+• Tek yerden renk yönetimi
+• Dinamik değişkenler
+• Theme switching kolaylığı
+• Kod tekrarını azaltma
+
+Kullanım:
+:root {
+    --primary: #6366f1;
+}
+.button {
+    background: var(--primary);
+}
+
+
+ANIMASYON SİSTEMİ
+--------------------------
+CSS Keyframes:
+• fadeInUp: Sayfa yüklenme animasyonu
+• float: Sürekli hareket animasyonu
+• slideDown: Alert mesajları
+
+JavaScript Animasyonları:
+• Scroll animations
+• Click ripple effects
+• Fade in/out
+
+Transition Kullanımı:
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+
+===============================================================================
+10. GELECEK GELİŞTİRMELER
+===============================================================================
+
+ÖNERİLEN YENİ ÖZELLİKLER:
+--------------------------
+
+1. Ödeme Entegrasyonu
+   □ İyzico / Stripe / PayPal
+   □ Kredi kartı ile ödeme
+   □ 3D Secure desteği
+   □ Sipariş takibi
+
+2. Sipariş Yönetimi
+   □ Orders tablosu
+   □ Sipariş durumu (beklemede, onaylandı, kargoda, teslim edildi)
+   □ Sipariş geçmişi
+   □ Fatura oluşturma
+
+3. Kullanıcı Profili
+   □ Profil düzenleme
+   □ Adres yönetimi
+   □ Favori ürünler
+   □ Sipariş geçmişi
+
+4. Gelişmiş Ürün Özellikleri
+   □ Kategori sistemi
+   □ Ürün filtreleme (fiyat, kategori)
+   □ Ürün sıralama (fiyat, yenilik)
+   □ Ürün detay sayfası
+   □ Ürün yorumları ve puanlama
+   □ Çoklu görsel desteği
+
+5. Kargo Entegrasyonu
+   □ Kargo firması seçimi
+   □ Kargo takip numarası
+   □ Kargo fiyat hesaplama
+
+6. Email Sistemi
+   □ Kayıt onay maili
+   □ Şifre sıfırlama
+   □ Sipariş onay maili
+   □ Newsletter
+
+7. Güvenlik Geliştirmeleri
+   □ CSRF Token sistemi
+   □ Rate limiting
+   □ Two-factor authentication (2FA)
+   □ ReCAPTCHA entegrasyonu
+
+8. Admin Panel Geliştirmeleri
+   □ Satış grafikleri
+   □ Kullanıcı yönetimi
+   □ Sipariş yönetimi
+   □ İstatistikler ve raporlar
+   □ Kategori yönetimi
+
+9. SEO Optimizasyonu
+   □ Meta tags
+   □ Sitemap
+   □ robots.txt
+   □ Open Graph tags
+   □ Schema markup
+
+10. Performans İyileştirmeleri
+    □ Caching sistemi
+    □ Image lazy loading
+    □ CDN kullanımı
+    □ Minification (CSS, JS)
+    □ GZIP compression
+
+11. Çoklu Dil Desteği
+    □ i18n sistemi
+    □ Türkçe / İngilizce
+
+12. Sosyal Medya Entegrasyonu
+    □ Sosyal medya ile giriş
+    □ Ürün paylaşma
+    □ Social proof gösterimi
+
+13. Wishlist (Favori Listesi)
+    □ Favorilere ekleme
+    □ Favori ürünler sayfası
+
+14. Kupon ve İndirim Sistemi
+    □ İndirim kodları
+    □ Kampanya yönetimi
+    □ Flash sale
+
+15. Canlı Destek
+    □ Live chat
+    □ Chatbot entegrasyonu
+
+
+TEKNİK İYİLEŞTİRMELER:
+--------------------------
+□ MVC mimarisine tam geçiş
+□ OOP (Object Oriented Programming) yaklaşımı
+□ Composer ile dependency management
+□ PSR standartlarına uyum
+□ Unit testing (PHPUnit)
+□ API geliştirme (RESTful)
+□ Docker containerization
+□ Git version control
+□ CI/CD pipeline
+
+
+===============================================================================
+                            PROJE İSTATİSTİKLERİ
+===============================================================================
+
+Dosya Sayısı: 15+ PHP dosyası
+Satır Sayısı:
+  - PHP: ~2500+ satır
+  - CSS: 590 satır
+  - JavaScript: ~50 satır
+  - SQL: 200+ satır
+
+Tablo Sayısı: 3 (users, products, cart)
+Örnek Veri: 9 ürün, 1 admin kullanıcı
+
+Bootstrap Components Kullanılan:
+  - Navbar
+  - Cards
+  - Forms
+  - Buttons
+  - Badges
+  - Alerts
+  - Tables
+  - Grid System
+
+Bootstrap Icons: 50+ farklı icon kullanıldı
+
+
+===============================================================================
+                              PROJE EKRAN GÖRÜNTÜLERİ
+===============================================================================
+
+Ana Sayfa:
+  - Revolutionary hero section (gradient + floating cards)
+  - Features section (3 icon cards)
+  - Featured products (3 ürün)
+  - CTA section
+
+Ürünler:
+  - Gradient page header
+  - Search bar
+  - Product grid (4 columns)
+  - Badges ve hover effects
+
+Login/Register:
+  - Split-screen design
+  - Modern forms
+  - Gradient backgrounds
+  - Social login buttons
+
+Admin Panel:
+  - Dashboard header
+  - Product form
+  - Product list table
+  - Modern cards
+
+Sepet:
+  - Product table
+  - Total price calculation
+  - Remove buttons
+
+
+===============================================================================
+                          TEKNİK SUNUM İÇİN NOTLAR
+===============================================================================
+
+SUNUMDA VURGULANMASI GEREKENLER:
+--------------------------
+
+1. Modern Teknoloji Stack
+   ✓ PHP + MySQL (güvenilir ve yaygın)
+   ✓ Bootstrap 5 (güncel framework)
+   ✓ Vanilla JavaScript (dependency yok)
+
+2. Güvenlik Önceliği
+   ✓ SQL Injection koruması
+   ✓ XSS koruması
+   ✓ Güvenli şifreleme (bcrypt)
+   ✓ Session güvenliği
+
+3. Modern Tasarım
+   ✓ Glassmorphism
+   ✓ Gradient backgrounds
+   ✓ Smooth animations
+   ✓ Responsive design
+
+4. Kullanıcı Deneyimi
+   ✓ Kolay navigasyon
+   ✓ Hızlı arama
+   ✓ Clear feedback
+   ✓ Mobile-friendly
+
+5. Ölçeklenebilirlik
+   ✓ Modüler yapı
+   ✓ Veritabanı normalizasyonu
+   ✓ Temiz kod yapısı
+
+
+DEMO SENARYOSU:
+--------------------------
+
+1. Ana sayfayı göster
+   - Hero section
+   - Features
+   - Products
+
+2. Kayıt ol
+   - Form doldur
+   - Validation göster
+   - Başarılı kayıt
+
+3. Ürünleri gez
+   - Arama yap
+   - Ürün kartlarını göster
+
+4. Sepete ekle
+   - Bir ürün ekle
+   - Sepeti göster
+
+5. Admin paneli
+   - Giriş yap (admin hesabı)
+   - Yeni ürün ekle
+   - Ürün düzenle
+   - Dashboard göster
+
+
+SIK SORULAN SORULAR:
+--------------------------
+
+S: Neden PHP kullandınız?
+C: PHP yaygın, güvenilir ve hosting desteği kolay. Ayrıca öğrenmesi ve
+   kullanması basit. E-ticaret projeleri için ideal.
+
+S: Veritabanı neden MySQL?
+C: MySQL açık kaynak, hızlı, güvenilir ve PHP ile mükemmel entegrasyon.
+   İlişkisel veritabanı yapısı e-ticaret için uygun.
+
+S: Framework kullanmadınız mı?
+C: Vanilla PHP kullandım çünkü temelleri anlamak ve öğrenmek için en iyisi.
+   Gelecekte Laravel gibi framework'lere geçiş kolay olacak.
+
+S: Mobil uygulama versiyonu var mı?
+C: Şu an responsive web sitesi var. Gelecekte React Native ile mobil app
+   geliştirilebilir. API hazır olunca kolay entegre edilir.
+
+S: Ödeme sistemi var mı?
+C: Şu an demo amaçlı proje olduğu için yok. İyzico, Stripe gibi ödeme
+   gateway'leri kolayca entegre edilebilir.
+
+
+===============================================================================
+                              KAYNAKLAR
+===============================================================================
+
+Dokümantasyon:
+• PHP Official Documentation: https://www.php.net/docs.php
+• MySQL Documentation: https://dev.mysql.com/doc/
+• Bootstrap 5: https://getbootstrap.com/docs/5.3/
+• Bootstrap Icons: https://icons.getbootstrap.com/
+
+Öğrenme Kaynakları:
+• W3Schools PHP: https://www.w3schools.com/php/
+• MDN Web Docs: https://developer.mozilla.org/
+• CSS-Tricks: https://css-tricks.com/
+
+Tasarım İlhamı:
+• Dribbble: https://dribbble.com/
+• Behance: https://www.behance.net/
+• Awwwards: https://www.awwwards.com/
+
+
+===============================================================================
+                              İLETİŞİM
+===============================================================================
+
+Proje Geliştiricisi: [Adınız]
+GitHub: [GitHub profiliniz]
+LinkedIn: [LinkedIn profiliniz]
+Email: [Email adresiniz]
+
+Proje Deposu: [GitHub repo linki]
+Demo Link: http://localhost/Projects/MiniShop/
+
+
+===============================================================================
+                            TEŞEKKÜRLER
+===============================================================================
+
+Bu proje modern web geliştirme tekniklerini, güvenlik prensiplerine önem
+vererek ve kullanıcı deneyimini ön planda tutarak geliştirilmiştir.
+
+Sunumunuzda başarılar dileriz! 🚀
+
+===============================================================================
+                        Son Güncelleme: 2024
+===============================================================================
