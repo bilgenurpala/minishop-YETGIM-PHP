@@ -174,7 +174,11 @@ require_once 'includes/header.php';
                     </div>
 
                     <!-- Customer Quote -->
+<<<<<<< HEAD
                     <div class="mt-5 bg-white bg-opacity-15 rounded-4 p-4 backdrop-blur">
+=======
+                    <div class="mt-5 bg-white bg-opacity-15 rounded-4 p-4 backdrop-blur text-dark">
+>>>>>>> 24e08fd (Update README, gitignore and product images)
                         <div class="mb-3">
                             <i class="bi bi-star-fill opacity-75"></i>
                             <i class="bi bi-star-fill opacity-75"></i>
@@ -186,7 +190,11 @@ require_once 'includes/header.php';
                             "MiniShop'tan aldığım ürünlerin kalitesi harika! Hızlı teslimat ve müşteri hizmetleri çok başarılı."
                         </p>
                         <p class="mb-0 small fw-semibold">
+<<<<<<< HEAD
                             - Ahmet Y. <span class="opacity-75">/ Mutlu Müşteri</span>
+=======
+                            - Yusuf P. <span class="opacity-75">/ Mutlu Müşteri</span>
+>>>>>>> 24e08fd (Update README, gitignore and product images)
                         </p>
                     </div>
                 </div>

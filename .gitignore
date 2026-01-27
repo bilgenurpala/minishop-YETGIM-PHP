@@ -11,9 +11,14 @@ vendor/
 *.env
 config.php
 
+<<<<<<< HEAD
 assets/images/*.jpg
 assets/images/*.jpeg
 assets/images/*.png
 assets/images/*.gif
 assets/images/*.webp
 !assets/images/no-image.png
+=======
+includes/db.php
+database.sql
+>>>>>>> 24e08fd (Update README, gitignore and product images)
