@@ -1,0 +1,15 @@
+.idea/
+.vscode/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+node_modules/
+vendor/
+
+*.env
+config.php
+
+includes/db.php
+database.sql
