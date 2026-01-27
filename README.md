@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <div align="center">
 
 # 🛒 MiniShop - Modern E-Ticaret Platformu
@@ -17,8 +17,6 @@
 
 ---
 
-## ✨ Özellikler
-=======
 # 🛒 MiniShop - Modern E-Commerce Platform
 
 [![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
