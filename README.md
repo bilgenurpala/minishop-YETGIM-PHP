@@ -332,7 +332,7 @@ See [LICENSE](LICENSE) file for details.
 ## 📞 Support
 
 Need help? Feel free to:
-* 📧 [Email me](mailto:your.email@example.com)
+* 📧 [Email me](mailto:bilgenurpala@gmail.com)
 * 🐛 [Open an issue](https://github.com/bilgenurpala/minishop-YETGIM-PHP/issues)
 * 💬 [Start a discussion](https://github.com/bilgenurpala/minishop-YETGIM-PHP/discussions)
 
