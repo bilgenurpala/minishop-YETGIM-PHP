@@ -162,7 +162,7 @@ Your project is now ready to use! 🎉
 
 ### 👤 Test User Account
 ```
-📧 Email:    ahmet@example.com
+📧 Email:    bilge@example.com
 🔐 Password: admin123
 ```
 
